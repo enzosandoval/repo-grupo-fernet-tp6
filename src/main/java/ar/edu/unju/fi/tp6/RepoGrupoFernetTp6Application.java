@@ -1,4 +1,4 @@
-package ar.edu.unju.fi;
+package ar.edu.unju.fi.tp6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
