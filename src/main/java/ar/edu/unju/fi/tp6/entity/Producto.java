@@ -3,6 +3,13 @@
  */
 package ar.edu.unju.fi.tp6.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,15 +18,31 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name="productos")
 public class Producto {
 
 	// Atributos de clase
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
+	
+	@Column(name="prod_nombre", nullable = false)
 	private String nombre;
+	
+	@Column(name="prod_precio", nullable = false)
 	private double precio;
+	
+	@Column(name="prod_marca", nullable = false)
 	private String marca;
+	
+	@Column(name="prod_descripcion", nullable = false)
 	private String descripcion;
+	
+	@Column(name="prod_image", nullable = false)
 	private String image;
+	
+	@Column(name="prod_stock", nullable = false)
 	private int stock;
 
 	// Constructor por defecto
