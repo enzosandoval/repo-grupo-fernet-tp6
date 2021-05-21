@@ -20,17 +20,19 @@
 		<form action="/compra/guardar" th:object="${compra}" method="post">
 			<div class="row">
 				<div class="col-md-7">
-					<select name="legajo">
+				<label for="codigo">Producto</label>
+					<select name="codigo" >
 						<option th:each=" producto: ${productos}"
-							th:value="${producto.nombre}">
+							>
 							<spam th:text="${producto.nombre}"></spam>-
 						</option>
 					</select><br />
 				</div>
 				<div class="col-md-5">
-					<select name="legajo">
+				<label for="cliente">Cliente</label>
+					<select name="cliente" th:field="*{cliente.nroDocumento}">
 						<option th:each=" cliente: ${clientes}"
-							th:value="${cliente.nombreApellido}">
+							th:value="${cliente.nroDocumento}">
 							<spam th:text="${cliente.nombreApellido}"></spam>-
 							<spam th:text="${cliente.nroDocumento}"></spam>
 						</option>

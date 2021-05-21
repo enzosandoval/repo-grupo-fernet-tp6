@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Entity
 @Component
-@Table(name = "compras")
+@Table(name = "COMPRAS")
 public class Compra implements Serializable {
 
 	/**

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tp6.entity.Cliente;
@@ -37,6 +36,9 @@ public class CompraController {
 	private Cliente cliente;
 
 	@Autowired
+	private Producto producto;
+
+	@Autowired
 	private ICompraService compraService;
 
 	@Autowired
@@ -49,15 +51,16 @@ public class CompraController {
 	public String getCompra(Model model) throws Exception {
 		model.addAttribute("productos", productoService.obtenerProductos());
 		model.addAttribute("clientes", clienteService.obtenerClientes());
+		model.addAttribute("producto", producto);
 		model.addAttribute("compra", compra);
 		return "compra";
 	}
-	
 
 	@PostMapping("/compra/guardar")
-	public ModelAndView saveCompra(@RequestParam(value = "id", required = true) int id,
-			@ModelAttribute("compra") Compra compra) throws Exception {
-		
+	public ModelAndView saveCompra(@ModelAttribute("compra") Compra compra) throws Exception {
+		cliente = clienteService.obtenerCliente(compra.getCliente().getNroDocumento());
+
+		compra.setCliente(cliente);
 		
 		ModelAndView mav = new ModelAndView("tablacompras");
 		mav.addObject("compras", compraService.obtenerCompras());
