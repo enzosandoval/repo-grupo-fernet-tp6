@@ -3,6 +3,7 @@
  */
 package ar.edu.unju.fi.tp6.entity;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,37 +14,66 @@ import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
+ * It uses MySQL
+ * 
  * @author Team Fernet
  *
  */
-
+@Entity
 @Component
-public class Cliente {
+@Table(name = "clientes")
+public class Cliente implements Serializable {
 
-	// Atributos de clase
-	private String tipoDocumento;
-	private int nroDocumento;
-	private String nombreApellido;
-	private String email;
-	private String password;
 	/**
-	 * La anotación DateTimeFormat es para que la variable fechaNacimiento de tipo
-	 * LocalDate tome el String que viene de la vista como una fecha
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cli_id")
+	private long id;
+
+	@Column(name = "tipo_documento", length = 32, nullable = false)
+	private String tipoDocumento;
+
+	@Column(name = "numero_documento", length = 8, nullable = false)
+	private int nroDocumento;
+
+	@Column(name = "nombre_apellido", length = 64, nullable = false)
+	private String nombreApellido;
+
+	@Column(length = 128, nullable = false)
+	private String email;
+
+	@Column(length = 64, nullable = false)
+	private String password;
+
+	@Column(name = "fecha_nac")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
-	/**
-	 * Observe que la edad no es un párametro del constructor parametrizado, ya que
-	 * se calcula con el método getEdad()
-	 */
+
+	@Column
 	private int edad;
-	private int codigoAreaTelefono;
+
+	@Column(name = "codigo_area", nullable = false)
+	private String codigoAreaTelefono;
+
+	@Column(name = "numero_telefono", nullable = false)
 	private int nroTelefono;
+
+	@Column(name = "fecha_ultima_compra")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaUltimaCompra;
 
-	// Constructor sin párametros
 	public Cliente() {
 	}
 
@@ -59,7 +89,7 @@ public class Cliente {
 	 * @param fechaUltimaCompra
 	 */
 	public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
-			LocalDate fechaNacimiento, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
+			LocalDate fechaNacimiento, String codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
 		this.nombreApellido = nombreApellido;
@@ -71,12 +101,9 @@ public class Cliente {
 		this.fechaUltimaCompra = fechaUltimaCompra;
 	}
 
-	// Métodos para calcular tiempo transcurrido
-
 	/**
 	 * 
-	 * @return El tiempo transcurrido entre la última compra y la fecha actual
-	 *         expresado en años-meses-dias
+	 * @return Tiempo transcurrido entre última compra y la fecha actual.
 	 */
 	public String getTiempoTranscurridoUltimaCompra() {
 		String tiempoTranscurrido = "0";
@@ -90,8 +117,8 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @return Los días transcurridos desde la fecha de nacimiento hasta la fecha
-	 *         actual
+	 * @return Dias transcurridos desde la fecha de nacimiento hasta la fecha
+	 *         actual.
 	 */
 	public long getTiempoTranscurridoEnDiasFechaNacimiento() {
 		long diasTranscurridos = 0;
@@ -103,7 +130,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @return El tiempo que falta para el próximo cumple
+	 * @return Tiempo que falta para el próximo cumpleaños.
 	 */
 	public String getTiempoProximoCumple() {
 		String proximoCumple = "";
@@ -131,6 +158,20 @@ public class Cliente {
 				+ duracion.toSecondsPart();
 
 		return proximoCumple;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	/**
@@ -218,7 +259,7 @@ public class Cliente {
 	}
 
 	/**
-	 * @return La edad según el cálculo entre fechaDeNacimiento y la fecha actual
+	 * @return the edad según el cálculo entre fechaDeNacimiento y la fecha actual
 	 */
 	public int getEdad() {
 		int edad = 0;
@@ -238,14 +279,14 @@ public class Cliente {
 	/**
 	 * @return the codigoAreaTelefono
 	 */
-	public int getCodigoAreaTelefono() {
+	public String getCodigoAreaTelefono() {
 		return codigoAreaTelefono;
 	}
 
 	/**
 	 * @param codigoAreaTelefono the codigoAreaTelefono to set
 	 */
-	public void setCodigoAreaTelefono(int codigoAreaTelefono) {
+	public void setCodigoAreaTelefono(String codigoAreaTelefono) {
 		this.codigoAreaTelefono = codigoAreaTelefono;
 	}
 
@@ -279,10 +320,11 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento + ", nombreApellido="
-				+ nombreApellido + ", email=" + email + ", password=" + password + ", fechaNacimiento="
-				+ fechaNacimiento + ", edad=" + edad + ", codigoAreaTelefono=" + codigoAreaTelefono + ", nroTelefono="
-				+ nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra + "]";
+		return "Cliente [id=" + id + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
+				+ ", nombreApellido=" + nombreApellido + ", email=" + email + ", password=" + password
+				+ ", fechaNacimiento=" + fechaNacimiento + ", edad=" + edad + ", codigoAreaTelefono="
+				+ codigoAreaTelefono + ", nroTelefono=" + nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra
+				+ "]";
 	}
 
 }
