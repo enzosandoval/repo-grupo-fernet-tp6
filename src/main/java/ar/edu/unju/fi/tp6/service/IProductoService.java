@@ -15,10 +15,10 @@ public interface IProductoService {
 
 	public void guardar(Producto producto);
 
-	public Producto obtenerUltimo();
+	public Producto obtenerUltimo() throws Exception;
 
 	public List<Producto> obtenerProductos();
 
-	public Producto buscarProducto(int posicion);
+	public Producto buscarProducto(long id) throws Exception;
 	
 }

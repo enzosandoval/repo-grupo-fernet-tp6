@@ -51,7 +51,7 @@ public class ProductoController {
 			Model model) throws IOException {
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
-		producto.setImage(base64);
+		producto.setImagen(base64);
 		productoService.guardar(producto);
 		model.addAttribute("productos", productoService.obtenerProductos());
 		return "resultado";
@@ -60,10 +60,11 @@ public class ProductoController {
 	/**
 	 * 
 	 * @return La página que muestra el último producto agregado
+	 * @throws Exception
 	 */
 	@GetMapping("/producto/ultimo")
-	public String getUltimoProducto(Model map) {
-		map.addAttribute("producto", productoService.obtenerUltimo());
+	public String getUltimoProducto(Model map) throws Exception {
+			map.addAttribute("producto", productoService.obtenerUltimo());
 		return "ultimoproducto";
 	}
 

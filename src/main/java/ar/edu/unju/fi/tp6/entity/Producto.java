@@ -5,9 +5,13 @@ package ar.edu.unju.fi.tp6.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,56 +21,61 @@ import org.springframework.stereotype.Component;
  *
  */
 
-@Component
 @Entity
-@Table(name="productos")
+@Component
+@Table(name = "PRODUCTOS")
 public class Producto {
 
-	// Atributos de clase
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "prod_codigo")
 	private int codigo;
-	
-	@Column(name="prod_nombre", nullable = false)
+
+	@Column(name = "prod_nombre", nullable = false)
 	private String nombre;
-	
-	@Column(name="prod_precio", nullable = false)
+
+	@Column(name = "prod_precio", nullable = false)
 	private double precio;
-	
-	@Column(name="prod_marca", nullable = false)
+
+	@Column(name = "prod_marca", nullable = false)
 	private String marca;
-	
-	@Column(name="prod_descripcion", nullable = false)
+
+	@Column(name = "prod_descripcion", nullable = false)
 	private String descripcion;
-	
-	@Column(name="prod_image", nullable = false)
-	private String image;
-	
-	@Column(name="prod_stock", nullable = false)
+
+	@Lob
+	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
+	private String imagen;
+
+	@Column(name = "prod_stock", nullable = false)
 	private int stock;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "com_id")
+	private Compra compra;
 
 	// Constructor por defecto
 	public Producto() {
 	}
 
 	/**
-	 * @param codigo
 	 * @param nombre
 	 * @param precio
 	 * @param marca
 	 * @param descripcion
-	 * @param image
+	 * @param imagen
 	 * @param stock
+	 * @param compra
 	 */
-	public Producto(int codigo, String nombre, double precio, String marca, String descripcion, String image,
-			int stock) {
-		this.codigo = codigo;
+	public Producto(String nombre, double precio, String marca, String descripcion, String imagen, int stock,
+			Compra compra) {
 		this.nombre = nombre;
 		this.precio = precio;
 		this.marca = marca;
 		this.descripcion = descripcion;
-		this.image = image;
+		this.imagen = imagen;
 		this.stock = stock;
+		this.compra = compra;
 	}
 
 	/**
@@ -140,17 +149,17 @@ public class Producto {
 	}
 
 	/**
-	 * @return the image
+	 * @return the imagen
 	 */
-	public String getImage() {
-		return image;
+	public String getImagen() {
+		return imagen;
 	}
 
 	/**
-	 * @param image the image to set
+	 * @param imagen the imagen to set
 	 */
-	public void setImage(String image) {
-		this.image = image;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	/**
@@ -167,10 +176,25 @@ public class Producto {
 		this.stock = stock;
 	}
 
+	/**
+	 * @return the compra
+	 */
+	public Compra getCompra() {
+		return compra;
+	}
+
+	/**
+	 * @param compra the compra to set
+	 */
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [codigo=" + codigo + ", nombre=" + nombre + ", precio=" + precio + ", marca=" + marca
-				+ ", descripcion=" + descripcion + ", image=" + image + ", stock=" + stock + "]";
+				+ ", descripcion=" + descripcion + ", imagen=" + imagen + ", stock=" + stock + ", compra=" + compra
+				+ "]";
 	}
 
 }

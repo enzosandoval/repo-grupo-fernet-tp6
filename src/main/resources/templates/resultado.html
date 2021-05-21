@@ -25,7 +25,7 @@
 				<a id="non-effecteed-link" th:href="@{/compra/(id=${i.index})}">
 					<div class="card h-100 box__card">
 						<img class="card-img-top"
-							th:src="*{'data:image/png;base64,'+producto.image}"
+							th:src="*{'data:image/png;base64,'+producto.imagen}"
 							alt="Card image cap">
 						<div class="card-body">
 							<h6 class="card-title" th:text="${producto.nombre}"></h6>

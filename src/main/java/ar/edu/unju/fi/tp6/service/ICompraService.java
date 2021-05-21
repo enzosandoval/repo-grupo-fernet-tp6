@@ -12,8 +12,6 @@ public interface ICompraService {
 
 	public void guardarCompra(Compra compra);
 
-	public Compra obtenerUltimaCompra();
-
 	public List<Compra> obtenerCompras();
 
 }

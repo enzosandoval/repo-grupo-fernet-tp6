@@ -22,21 +22,18 @@
 		<div class="row col-md-12">
 			<div class="col-md-3 mb-4" th:each="producto, i : ${productos}"
 				th:unless="${i.index > 36}">
-				<a id="non-effecteed-link"
-					th:href="@{/compra/(id=${producto.codigo})}">
-					<div class="card h-100 box__card">
-						<img class="card-img-top"
-							th:src="*{'data:image/png;base64,'+producto.image}"
-							alt="Card image cap">
-						<div class="card-body">
-							<h6 class="card-title" th:text="${producto.nombre}"></h6>
-							<p class="card-text font-weight-bold" style="font-size: 1.2em;">
-								$ <span
-									th:text="${#numbers.formatDecimal(producto.precio, 0, 'COMMA', 2, 'POINT')}">10.00</span>
-							</p>
-						</div>
+				<div class="card h-100 box__card">
+					<img class="card-img-top"
+						th:src="*{'data:image/png;base64,'+producto.imagen}"
+						alt="Card image cap">
+					<div class="card-body">
+						<h6 class="card-title" th:text="${producto.nombre}"></h6>
+						<p class="card-text font-weight-bold" style="font-size: 1.2em;">
+							$ <span
+								th:text="${#numbers.formatDecimal(producto.precio, 0, 'COMMA', 2, 'POINT')}">10.00</span>
+						</p>
 					</div>
-				</a>
+				</div>
 			</div>
 		</div>
 	</div>

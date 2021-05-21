@@ -13,9 +13,10 @@ import ar.edu.unju.fi.tp6.entity.Cliente;
  */
 public interface IClienteService {
 
-	public void generarLista();
-
 	public void guardar(Cliente cliente);
 
-	public List<Cliente> obtenerLista();
+	public Cliente obtenerCliente(int dni);
+	
+	public List<Cliente> obtenerClientes();
+	
 }

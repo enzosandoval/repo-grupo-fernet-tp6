@@ -29,7 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Component
-@Table(name = "clientes")
+@Table(name = "CLIENTES")
 public class Cliente implements Serializable {
 
 	/**
@@ -51,17 +51,17 @@ public class Cliente implements Serializable {
 	@Column(name = "nombre_apellido", length = 64, nullable = false)
 	private String nombreApellido;
 
-	@Column(length = 128, nullable = false)
+	@Column(name = "email", length = 128, nullable = false)
 	private String email;
 
-	@Column(length = 64, nullable = false)
+	@Column(name = "password", length = 64, nullable = false)
 	private String password;
 
 	@Column(name = "fecha_nac")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 
-	@Column
+	@Column(name = "edad")
 	private int edad;
 
 	@Column(name = "codigo_area", nullable = false)

@@ -61,7 +61,7 @@ public class ClienteController {
 		 * Se agrega la listaClientes de la clase que implementa IServiceCliente al
 		 * modelAndView para luego ser recorrida y mostrada en la vista("clientes")
 		 */
-		modelAndView.addObject("listado", serviceCliente.obtenerLista());
+		modelAndView.addObject("listado", serviceCliente.obtenerClientes());
 		return modelAndView;
 	}
 
@@ -72,7 +72,7 @@ public class ClienteController {
 	 */
 	@GetMapping("/cliente/lista")
 	public String getListadoPage(Model model) {
-		model.addAttribute("listado", serviceCliente.obtenerLista());
+		model.addAttribute("listado", serviceCliente.obtenerClientes());
 		return "clientes";
 	}
 
