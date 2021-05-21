@@ -4,8 +4,6 @@
 package ar.edu.unju.fi.tp6.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -41,21 +38,15 @@ public class Compra implements Serializable {
 	@Column(name = "com_id")
 	private long id;
 
-	/**
-	 * Queda al aire este atributo
-	 */
 	@Column(name = "cantidad")
 	private int cantidad;
 
 	@Column(name = "total")
 	private double total;
 
-	@OneToOne
-	@JoinColumn(name = "cli_id")
-	private Cliente cliente;
-
-	@OneToMany(mappedBy = "compra", fetch = FetchType.LAZY)
-	private List<Producto> productos = new ArrayList<Producto>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prod_codigo")
+	private Producto producto;
 
 	public Compra() {
 	}
@@ -64,11 +55,12 @@ public class Compra implements Serializable {
 	 * @param cantidad
 	 * @param total
 	 * @param cliente
+	 * @param producto
 	 */
-	public Compra(int cantidad, double total, Cliente cliente) {
+	public Compra(int cantidad, double total, Producto producto) {
 		this.cantidad = cantidad;
 		this.total = total;
-		this.cliente = cliente;
+		this.producto = producto;
 	}
 
 	/**
@@ -114,44 +106,22 @@ public class Compra implements Serializable {
 	}
 
 	/**
-	 * @return the cliente
+	 * @return the producto
 	 */
-	public Cliente getCliente() {
-		return cliente;
+	public Producto getProducto() {
+		return producto;
 	}
 
 	/**
-	 * @param cliente the cliente to set
+	 * @param producto the producto to set
 	 */
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	/**
-	 * @return the productos
-	 */
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-	/**
-	 * @param productos the productos to set
-	 */
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	@Override
 	public String toString() {
-		return "Compra [id=" + id + ", cantidad=" + cantidad + ", total=" + total + ", cliente=" + cliente
-				+ ", productos=" + productos + "]";
+		return "Compra [id=" + id + ", cantidad=" + cantidad + ", total=" + total + ", producto=" + producto + "]";
 	}
 
 }

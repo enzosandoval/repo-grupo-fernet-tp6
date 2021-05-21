@@ -50,10 +50,6 @@ public class Producto {
 	@Column(name = "prod_stock", nullable = false)
 	private int stock;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "com_id")
-	private Compra compra;
-
 	// Constructor por defecto
 	public Producto() {
 	}
@@ -67,15 +63,13 @@ public class Producto {
 	 * @param stock
 	 * @param compra
 	 */
-	public Producto(String nombre, double precio, String marca, String descripcion, String imagen, int stock,
-			Compra compra) {
+	public Producto(String nombre, double precio, String marca, String descripcion, String imagen, int stock) {
 		this.nombre = nombre;
 		this.precio = precio;
 		this.marca = marca;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.stock = stock;
-		this.compra = compra;
 	}
 
 	/**
@@ -176,25 +170,10 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	/**
-	 * @return the compra
-	 */
-	public Compra getCompra() {
-		return compra;
-	}
-
-	/**
-	 * @param compra the compra to set
-	 */
-	public void setCompra(Compra compra) {
-		this.compra = compra;
-	}
-
 	@Override
 	public String toString() {
 		return "Producto [codigo=" + codigo + ", nombre=" + nombre + ", precio=" + precio + ", marca=" + marca
-				+ ", descripcion=" + descripcion + ", imagen=" + imagen + ", stock=" + stock + ", compra=" + compra
-				+ "]";
+				+ ", descripcion=" + descripcion + ", imagen=" + imagen + ", stock=" + stock + "]";
 	}
 
 }
