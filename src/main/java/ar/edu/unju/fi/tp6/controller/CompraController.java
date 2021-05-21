@@ -3,9 +3,6 @@
  */
 package ar.edu.unju.fi.tp6.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +58,8 @@ public class CompraController {
 		cliente = clienteService.obtenerCliente(compra.getCliente().getNroDocumento());
 
 		compra.setCliente(cliente);
+		
+		compraService.guardarCompra(compra);
 		
 		ModelAndView mav = new ModelAndView("tablacompras");
 		mav.addObject("compras", compraService.obtenerCompras());
