@@ -14,12 +14,12 @@
 	th:href="@{/webjars/fontawesome/css/font-awesome.min.css}"></link>
 <body>
 	<div th:replace="layout/navbar :: navbar"></div>
-	<div class="col-xs-12" style="height: 60px;"></div>
+	<div class="col-xs-12" style="height: 30px;"></div>
 	<div th:if="${compras.size > 0}" class="container-fluid">
-		<h2>Compras</h2>
-		<div class="row-fluid">
-			<div class="col-12">
-				<table class="table table-bordered table-responsive p-3">
+		<div class="row-fluid py-5 my-5 bg-white shadow">
+			<h2 class="text-center">COMPRAS</h2>
+			<div class="col-12 py-3">
+				<table class="table table-bordered table-responsive">
 					<thead class="thead-dark">
 						<tr class="text-center">
 							<th style="width: 6%">ID</th>
