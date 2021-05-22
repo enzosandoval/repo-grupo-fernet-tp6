@@ -5,13 +5,10 @@ package ar.edu.unju.fi.tp6.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -29,25 +26,25 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "prod_codigo")
-	private int codigo;
+	private long codigo;
 
-	@Column(name = "prod_nombre", nullable = false)
+	@Column(name = "prod_nombre")
 	private String nombre;
 
-	@Column(name = "prod_precio", nullable = false)
+	@Column(name = "prod_precio")
 	private double precio;
 
-	@Column(name = "prod_marca", nullable = false)
+	@Column(name = "prod_marca")
 	private String marca;
 
-	@Column(name = "prod_descripcion", nullable = false)
+	@Column(name = "prod_descripcion")
 	private String descripcion;
 
 	@Lob
 	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
 	private String imagen;
 
-	@Column(name = "prod_stock", nullable = false)
+	@Column(name = "prod_stock")
 	private int stock;
 
 	// Constructor por defecto
@@ -75,14 +72,14 @@ public class Producto {
 	/**
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
 	/**
 	 * @param codigo the codigo to set
 	 */
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
