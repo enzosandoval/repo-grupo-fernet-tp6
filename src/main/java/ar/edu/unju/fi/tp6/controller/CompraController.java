@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,10 +37,9 @@ public class CompraController {
 	@Autowired
 	private IProductoService productoService;
 
-	@GetMapping("/compra")
-	public String getCompra(Model model) throws Exception {
-		model.addAttribute("productos", productoService.obtenerProductos());
-		model.addAttribute("producto", producto);
+	@GetMapping(value = "/comprar/{id}")
+	public String comprar(@PathVariable(value = "id") long id, Model model) throws Exception {
+		compra.setProducto(productoService.buscarProducto(id));
 		model.addAttribute("compra", compra);
 		return "compra";
 	}

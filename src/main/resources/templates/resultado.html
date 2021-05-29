@@ -11,7 +11,6 @@
 <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
-	<div th:replace="layout/header.html :: header"></div>
 	<div th:replace="layout/navbar.html :: navbar"></div>
 	<br>
 	<div class="container-fluid">
@@ -22,7 +21,7 @@
 		<div class="row col-md-12">
 			<div class="col-md-3" th:each="producto, i : ${productos}"
 				th:unless="${i.index > 36}">
-				<a id="non-effecteed-link" th:href="@{/compra/(id=${i.index})}">
+				<a id="non-effecteed-link" th:href="@{/comprar/{id}(id=${producto.codigo})}">
 					<div class="card h-100 box__card">
 						<img class="card-img-top"
 							th:src="*{'data:image/png;base64,'+producto.imagen}"
